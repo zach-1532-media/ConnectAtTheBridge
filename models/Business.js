@@ -20,6 +20,7 @@ const BusinessSchema = new mongoose.Schema({
   address: String,
   state: String,
   city: String,
+  zip: String,
   firstName: String,
   lastName: String,
   phone: String,

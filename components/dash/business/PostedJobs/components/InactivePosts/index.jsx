@@ -86,7 +86,7 @@ const ActivePosts = ({ jobs, business }) => {
 };
 
 ActivePosts.propTypes = {
-  jobs: PropTypes.object.isRequired,
+  jobs: PropTypes.array.isRequired,
   business: PropTypes.object.isRequired,
 };
 

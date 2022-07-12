@@ -1,5 +1,8 @@
+/* eslint-disable no-underscore-dangle */
 /* eslint-disable react/forbid-prop-types */
 import { React, useRef, useState } from 'react';
+
+import Link from 'next/link';
 
 import PropTypes from 'prop-types';
 
@@ -13,10 +16,10 @@ import ListItemText from '@mui/material/ListItemText';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
-import InboxTwoToneIcon from '@mui/icons-material/InboxTwoTone';
 import ExpandMoreTwoToneIcon from '@mui/icons-material/ExpandMoreTwoTone';
-import AccountBoxTwoToneIcon from '@mui/icons-material/AccountBoxTwoTone';
-import AccountTreeTwoToneIcon from '@mui/icons-material/AccountTreeTwoTone';
+import WorkTwoToneIcon from '@mui/icons-material/WorkTwoTone';
+import PostAddTwoToneIcon from '@mui/icons-material/PostAddTwoTone';
+import ManageAccountsTwoToneIcon from '@mui/icons-material/ManageAccountsTwoTone';
 
 const UserBoxButton = styled(Button)(
   ({ theme }) => `
@@ -145,33 +148,42 @@ function HeaderUserbox({ business }) {
           }}
           component="nav"
         >
-          <ListItem
-            onClick={() => {
-              handleClose();
-            }}
-            button
+          <Link href={`/dashboards/business/${business._id}`} passHref>
+            <ListItem
+              onClick={() => {
+                handleClose();
+              }}
+              button
+            >
+              <ManageAccountsTwoToneIcon fontSize="small" />
+              <ListItemText primary="Profile" />
+            </ListItem>
+          </Link>
+          <Link
+            href={`/dashboards/business/postedJobs/${business._id}`}
+            passHref
           >
-            <AccountBoxTwoToneIcon fontSize="small" />
-            <ListItemText primary="Profile" />
-          </ListItem>
-          <ListItem
-            onClick={() => {
-              handleClose();
-            }}
-            button
-          >
-            <InboxTwoToneIcon fontSize="small" />
-            <ListItemText primary="Inbox" />
-          </ListItem>
-          <ListItem
-            onClick={() => {
-              handleClose();
-            }}
-            button
-          >
-            <AccountTreeTwoToneIcon fontSize="small" />
-            <ListItemText primary="Projects" />
-          </ListItem>
+            <ListItem
+              onClick={() => {
+                handleClose();
+              }}
+              button
+            >
+              <WorkTwoToneIcon fontSize="small" />
+              <ListItemText primary="Posted Jobs" />
+            </ListItem>
+          </Link>
+          <Link href={`/dashboards/business/postAJob/${business._id}`} passHref>
+            <ListItem
+              onClick={() => {
+                handleClose();
+              }}
+              button
+            >
+              <PostAddTwoToneIcon fontSize="small" />
+              <ListItemText primary="Post A Job" />
+            </ListItem>
+          </Link>
         </List>
         <Divider />
       </Popover>

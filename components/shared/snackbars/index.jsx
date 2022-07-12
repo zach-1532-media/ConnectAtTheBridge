@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/require-default-props */
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
@@ -7,7 +8,7 @@ import PropTypes from 'prop-types';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-export const SuccessSnack = ({ openSuccess, setOpenSuccess, user }) => {
+export const SuccessSnack = ({ openSuccess, setOpenSuccess, message }) => {
   const handleSuccessClose = () => setOpenSuccess(false);
 
   return (
@@ -18,7 +19,13 @@ export const SuccessSnack = ({ openSuccess, setOpenSuccess, user }) => {
       onClose={handleSuccessClose}
     >
       <Alert severity="success">
-        {user ? 'Your account has been created!' : "You're all signed up!"}
+        {message === 'user'
+          ? 'Your account has been created!'
+          : message === 'newsletter'
+          ? "You're all signed up!"
+          : message === 'edit'
+          ? 'Profile has been updated'
+          : null}
       </Alert>
     </Snackbar>
   );
@@ -27,7 +34,7 @@ export const SuccessSnack = ({ openSuccess, setOpenSuccess, user }) => {
 SuccessSnack.propTypes = {
   openSuccess: PropTypes.bool.isRequired,
   setOpenSuccess: PropTypes.func.isRequired,
-  user: PropTypes.bool,
+  message: PropTypes.string,
 };
 
 export const ExistingUserSnack = ({

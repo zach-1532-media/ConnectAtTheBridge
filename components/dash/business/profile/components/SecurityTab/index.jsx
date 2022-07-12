@@ -128,7 +128,7 @@ function SecurityTab() {
                   pr: 2,
                 }}
               >
-                <AvatarWrapper src="/static/images/logo/google.svg" />
+                <AvatarWrapper src="https://connectatthebridge.nyc3.cdn.digitaloceanspaces.com/site-assets/googleTokyo.svg" />
               </ListItemAvatar>
               <ListItemText
                 primaryTypographyProps={{ variant: 'h5', gutterBottom: true }}

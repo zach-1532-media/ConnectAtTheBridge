@@ -77,13 +77,13 @@ const CardCoverAction = styled(Box)(
 `
 );
 
-const ProfileCover = ({ business }) => (
+const ProfileCover = ({ data }) => (
   <>
     <Box display="flex" mb={3}>
       <Box>{/* PUT TABS HERE */}</Box>
     </Box>
     <CardCover>
-      <CardMedia image={business.cover} />
+      <CardMedia image={data.cover} />
       <CardCoverAction>
         <Input accept="image/*" id="change-cover" multiple type="file" />
         <label htmlFor="change-cover">
@@ -99,11 +99,7 @@ const ProfileCover = ({ business }) => (
     </CardCover>
     <Tooltip placement="right-end" title="Upload Your Logo">
       <AvatarWrapper>
-        <Avatar
-          variant="rounded"
-          alt={business.businessName}
-          src={business.avatar}
-        />
+        <Avatar variant="rounded" alt={data.businessName} src={data.avatar} />
         <ButtonUploadWrapper>
           <Input
             accept="image/*"
@@ -121,9 +117,9 @@ const ProfileCover = ({ business }) => (
     </Tooltip>
     <Box py={2} pl={2} mb={3}>
       <Typography gutterBottom variant="h4">
-        {business.businessName}
+        {data.businessName}
       </Typography>
-      <Typography variant="subtitle2">{business.bio}</Typography>
+      <Typography variant="subtitle2">{data.bio}</Typography>
       <Typography
         sx={{
           py: 2,
@@ -131,7 +127,7 @@ const ProfileCover = ({ business }) => (
         variant="subtitle2"
         color="text.primary"
       >
-        {business.city ?? ''} | {business.state ?? ''}
+        {data.city ?? ''} | {data.state ?? ''}
       </Typography>
       <Box
         display={{ xs: 'block', md: 'flex' }}
@@ -143,7 +139,7 @@ const ProfileCover = ({ business }) => (
             Follow
           </Button>
           <Button
-            href={`https://${business.site}`}
+            href={`https://${data.site}`}
             target="_blank"
             size="small"
             sx={{
@@ -168,7 +164,7 @@ const ProfileCover = ({ business }) => (
 );
 
 ProfileCover.propTypes = {
-  business: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
 };
 
 export default ProfileCover;

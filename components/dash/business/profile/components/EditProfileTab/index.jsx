@@ -1,213 +1,61 @@
-import React from 'react';
+/* eslint-disable react/forbid-prop-types */
+import { React, useState } from 'react';
+
+import PropTypes from 'prop-types';
 
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import CardContent from '@mui/material/CardContent';
-import Card from '@mui/material/Card';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Button from '@mui/material/Button';
-import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
-import DoneTwoToneIcon from '@mui/icons-material/DoneTwoTone';
 
-import Text from '../../../../../shared/text';
-import Label from '../../../../../shared/label';
+import { SuccessSnack, GeneralSnack } from '../../../../../shared/snackbars';
+import Backdrop from '../../../../../shared/backdrop';
+import DetailsCard from '../../../../../shared/detailsCard';
+import EditDetailsCard from '../../../../../shared/editDetailsCard';
 
-function EditProfileTab() {
+const EditProfileTab = ({ data }) => {
+  const [edit, setEdit] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
+  const [generalError, setGeneralError] = useState(false);
+  const [openBackdrop, setOpenBackdrop] = useState(false);
+
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
-        <Card>
-          <Box
-            p={3}
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Box>
-              <Typography variant="h4" gutterBottom>
-                Personal Details
-              </Typography>
-              <Typography variant="subtitle2">
-                Manage informations related to your personal details
-              </Typography>
-            </Box>
-            <Button variant="text" startIcon={<EditTwoToneIcon />}>
-              Edit
-            </Button>
-          </Box>
-          <Divider />
-          <CardContent
-            sx={{
-              p: 4,
-            }}
-          >
-            <Typography variant="subtitle2">
-              <Grid container spacing={0}>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Name:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Text color="black">
-                    <b>Craig Donin</b>
-                  </Text>
-                </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Date of birth:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Text color="black">
-                    <b>15 March 1977</b>
-                  </Text>
-                </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Address:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Box
-                    sx={{
-                      maxWidth: { xs: 'auto', sm: 300 },
-                    }}
-                  >
-                    <Text color="black">
-                      1749 High Meadow Lane, SEQUOIA NATIONAL PARK, California,
-                      93262
-                    </Text>
-                  </Box>
-                </Grid>
-              </Grid>
-            </Typography>
-          </CardContent>
-        </Card>
+        {!edit ? (
+          <DetailsCard
+            title="Business Details"
+            subtitle="Manage Informaion related to your business."
+            data={data}
+            setEdit={setEdit}
+            business
+          />
+        ) : (
+          <EditDetailsCard
+            title="Business Details"
+            subtitle="Edit your details below"
+            data={data}
+            setEdit={setEdit}
+            setOpenBackdrop={setOpenBackdrop}
+            setGeneralError={setGeneralError}
+            setOpenSuccess={setOpenSuccess}
+            business
+          />
+        )}
       </Grid>
-      <Grid item xs={12}>
-        <Card>
-          <Box
-            p={3}
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Box>
-              <Typography variant="h4" gutterBottom>
-                Account Settings
-              </Typography>
-              <Typography variant="subtitle2">
-                Manage details related to your account
-              </Typography>
-            </Box>
-            <Button variant="text" startIcon={<EditTwoToneIcon />}>
-              Edit
-            </Button>
-          </Box>
-          <Divider />
-          <CardContent
-            sx={{
-              p: 4,
-            }}
-          >
-            <Typography variant="subtitle2">
-              <Grid container spacing={0}>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Language:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Text color="black">
-                    <b>English (US)</b>
-                  </Text>
-                </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Timezone:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Text color="black">
-                    <b>GMT +2</b>
-                  </Text>
-                </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Account status:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Label color="success">
-                    <DoneTwoToneIcon fontSize="small" />
-                    <b>Active</b>
-                  </Label>
-                </Grid>
-              </Grid>
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
-      <Grid item xs={12}>
-        <Card>
-          <Box
-            p={3}
-            display="flex"
-            alignItems="center"
-            justifyContent="space-between"
-          >
-            <Box>
-              <Typography variant="h4" gutterBottom>
-                Email Addresses
-              </Typography>
-              <Typography variant="subtitle2">
-                Manage details related to your associated email addresses
-              </Typography>
-            </Box>
-            <Button variant="text" startIcon={<EditTwoToneIcon />}>
-              Edit
-            </Button>
-          </Box>
-          <Divider />
-          <CardContent
-            sx={{
-              p: 4,
-            }}
-          >
-            <Typography variant="subtitle2">
-              <Grid container spacing={0}>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Email ID:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Text color="black">
-                    <b>example@demo.com</b>
-                  </Text>
-                  <Box pl={1} component="span">
-                    <Label color="success">Primary</Label>
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={4} md={3} textAlign={{ sm: 'right' }}>
-                  <Box pr={3} pb={2}>
-                    Email ID:
-                  </Box>
-                </Grid>
-                <Grid item xs={12} sm={8} md={9}>
-                  <Text color="black">
-                    <b>demo@example.com</b>
-                  </Text>
-                </Grid>
-              </Grid>
-            </Typography>
-          </CardContent>
-        </Card>
-      </Grid>
+      <SuccessSnack
+        message="edit"
+        openSuccess={openSuccess}
+        setOpenSuccess={setOpenSuccess}
+      />
+      <GeneralSnack
+        generalError={generalError}
+        setGeneralError={setGeneralError}
+      />
+      <Backdrop open={openBackdrop} />
     </Grid>
   );
-}
+};
+
+EditProfileTab.propTypes = {
+  data: PropTypes.object.isRequired,
+};
 
 export default EditProfileTab;
