@@ -88,7 +88,7 @@ const JobBlock = ({ jobs }) => {
 };
 
 JobBlock.propTypes = {
-  jobs: PropTypes.object.isRequired,
+  jobs: PropTypes.array.isRequired,
 };
 
 export default JobBlock;

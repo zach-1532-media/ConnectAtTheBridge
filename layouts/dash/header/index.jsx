@@ -9,7 +9,6 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 
 import { SidebarContext } from '../../../components/contexts/sidebar';
-import HeaderButtons from './buttons';
 import HeaderUserbox from './userbox';
 import Logo from '../../../components/shared/logo';
 
@@ -40,7 +39,6 @@ function Header({ business }) {
         </Box>
       </Box>
       <Box display="flex" alignItems="center">
-        <HeaderButtons />
         <HeaderUserbox business={business} />
         <Box
           component="span"
