@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-concat */
 import { React, useState } from 'react';
 
 import Box from '@mui/material/Box';
@@ -95,7 +96,7 @@ function MyCards() {
   return (
     <Card>
       <CardHeader
-        subheader={`${data.savedCards} ``saved cards`}
+        subheader={`${data.savedCards} ` + `saved cards`}
         title="Cards"
       />
       <Divider />
