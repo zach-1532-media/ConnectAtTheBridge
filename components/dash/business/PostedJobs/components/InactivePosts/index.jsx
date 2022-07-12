@@ -20,7 +20,7 @@ import {
   ListingQuickViewButton,
 } from '../../../../../shared/listingQuickView';
 
-const InactivePosts = ({ jobs, business }) => {
+const ActivePosts = ({ jobs, business }) => {
   const [cardsPerPage, setCardsPerPage] = useState(9);
 
   const _DATA = usePagination(jobs, cardsPerPage);
@@ -52,7 +52,7 @@ const InactivePosts = ({ jobs, business }) => {
                   </ListingQuickViewButton>
                 </ListingQuickViewHeader>
                 <Divider sx={{ marginY: 4 }} />
-                <ListingQuickViewBody job={job}>
+                <ListingQuickViewBody job={job} business={business}>
                   <ListingQuickViewList
                     title="Primary Responsibilities"
                     job={job}
@@ -74,9 +74,9 @@ const InactivePosts = ({ jobs, business }) => {
   );
 };
 
-InactivePosts.propTypes = {
+ActivePosts.propTypes = {
   jobs: PropTypes.array.isRequired,
   business: PropTypes.object.isRequired,
 };
 
-export default InactivePosts;
+export default ActivePosts;
