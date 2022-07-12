@@ -47,12 +47,12 @@ const SidebarMenu = ({ business }) => {
   const menuItems = [
     {
       name: 'Profile',
-      link: `/dashboards/business/profile/${business._id}`,
+      link: `/dashboards/business/${business._id}`,
       icon: <ManageAccountsTwoToneIcon />,
     },
     {
       name: 'Posted Jobs',
-      link: `/dashboards/business/${business._id}`,
+      link: `/dashboards/business/postedJobs/${business._id}`,
       icon: <WorkTwoToneIcon />,
     },
     {

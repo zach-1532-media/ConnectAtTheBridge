@@ -357,7 +357,7 @@ Newsletter.propTypes = {
   setOpenBackdrop: PropTypes.bool.isRequired,
   setOpenSuccess: PropTypes.bool.isRequired,
   setExistingNewsletterError: PropTypes.bool.isRequired,
-  setGeneralError: PropTypes.bool.isRequired,
+  setGeneralError: PropTypes.func.isRequired,
 };
 
 export default Newsletter;

@@ -9,7 +9,6 @@ import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 
 import { SidebarContext } from '../../../components/contexts/sidebar';
-import HeaderMenu from './menu';
 import HeaderButtons from './buttons';
 import HeaderUserbox from './userbox';
 import Logo from '../../../components/shared/logo';
@@ -38,14 +37,6 @@ function Header({ business }) {
           }}
         >
           <Logo />
-        </Box>
-        <Box
-          component="span"
-          sx={{
-            display: { xs: 'none', md: 'inline-block' },
-          }}
-        >
-          <HeaderMenu />
         </Box>
       </Box>
       <Box display="flex" alignItems="center">
