@@ -25,6 +25,8 @@ export const SuccessSnack = ({ openSuccess, setOpenSuccess, message }) => {
           ? "You're all signed up!"
           : message === 'edit'
           ? 'Profile has been updated'
+          : message === 'jobPost'
+          ? 'Job has been posted!'
           : null}
       </Alert>
     </Snackbar>
@@ -116,7 +118,7 @@ export const GeneralSnack = ({ generalError, setGeneralError }) => {
       onClose={handleGeneralErrorClose}
     >
       <Alert severity="error">
-        There was an error connecting - please try again later Fart Face.
+        There was an error connecting - please try again later.
       </Alert>
     </Snackbar>
   );

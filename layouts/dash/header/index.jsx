@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 
 import { Box, IconButton, Tooltip, styled } from '@mui/material';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
-
 import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 
 import { SidebarContext } from '../../../components/contexts/sidebar';

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import Grid from '@mui/material/Grid';
 
 import { SuccessSnack, GeneralSnack } from '../../../../../shared/snackbars';
-import Backdrop from '../../../../../shared/backdrop';
 import DetailsCard from '../../../../../shared/detailsCard';
 import EditDetailsCard from '../../../../../shared/editDetailsCard';
 
@@ -14,7 +13,6 @@ const EditProfileTab = ({ data }) => {
   const [edit, setEdit] = useState(false);
   const [openSuccess, setOpenSuccess] = useState(false);
   const [generalError, setGeneralError] = useState(false);
-  const [openBackdrop, setOpenBackdrop] = useState(false);
 
   return (
     <Grid container spacing={3}>
@@ -33,7 +31,6 @@ const EditProfileTab = ({ data }) => {
             subtitle="Edit your details below"
             data={data}
             setEdit={setEdit}
-            setOpenBackdrop={setOpenBackdrop}
             setGeneralError={setGeneralError}
             setOpenSuccess={setOpenSuccess}
             business
@@ -49,7 +46,6 @@ const EditProfileTab = ({ data }) => {
         generalError={generalError}
         setGeneralError={setGeneralError}
       />
-      <Backdrop open={openBackdrop} />
     </Grid>
   );
 };

@@ -12,6 +12,7 @@ const JobSchema = new mongoose.Schema({
   travel: Boolean,
   jobTitle: String,
   freelanceType: String,
+  dateCreated: Date,
   businessID: {
     type: mongoose.Types.ObjectId,
     ref: 'Business',

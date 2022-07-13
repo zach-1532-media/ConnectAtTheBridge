@@ -8,14 +8,14 @@ import PropTypes from 'prop-types';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
-import { alpha, useTheme } from '@mui/material/styles';
-import MenuIcon from '@mui/icons-material/Menu';
+import IconButton from '@mui/material/IconButton';
+import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
+import CloseTwoToneIcon from '@mui/icons-material/CloseTwoTone';
 
 import NavItem from './navItem';
 import Logo from '../../../../components/shared/logo';
 
-const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
-  const theme = useTheme();
+const Topbar = ({ openSidebar, onSidebarOpen, colorInvert = false }) => {
   const [session] = useSession();
 
   const initial = !session ? null : session.user.email.slice(0, 1);
@@ -81,19 +81,14 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
         </Box>
       </Box>
       <Box sx={{ display: { xs: 'block', md: 'none' }, alignItems: 'center' }}>
-        <Button
-          onClick={() => onSidebarOpen()}
+        <IconButton
+          disableRipple
+          color="primary"
+          onClick={() => onSidebarOpen(true)}
           aria-label="Menu"
-          variant="outlined"
-          sx={{
-            borderRadius: 2,
-            minWidth: 'auto',
-            padding: 1,
-            borderColor: alpha(theme.palette.divider, 0.2),
-          }}
         >
-          <MenuIcon />
-        </Button>
+          {!openSidebar ? <MenuTwoToneIcon /> : <CloseTwoToneIcon />}
+        </IconButton>
       </Box>
     </Box>
   );
@@ -102,6 +97,7 @@ const Topbar = ({ onSidebarOpen, colorInvert = false }) => {
 Topbar.propTypes = {
   onSidebarOpen: PropTypes.func.isRequired,
   colorInvert: PropTypes.bool,
+  openSidebar: PropTypes.bool.isRequired,
 };
 
 Topbar.defaultProps = {

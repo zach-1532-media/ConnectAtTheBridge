@@ -43,7 +43,7 @@ const JobBlock = ({ jobs }) => {
       <Divider gutterBottom sx={{ marginY: 4 }} />
       <Grid container spacing={4}>
         {jobsSlice.map((job) => (
-          <Grid item xs={12} sm={6} md={4} key={job.jobTitle}>
+          <Grid item xs={12} sm={6} md={4} key={job._id}>
             <Box
               display="block"
               width={1}
@@ -60,7 +60,7 @@ const JobBlock = ({ jobs }) => {
                 job={job}
                 height={1}
                 width={1}
-                key={job.jobTitle}
+                key={job._id}
                 isJobsPage={isJobsPage}
               >
                 <ListingQuickView>

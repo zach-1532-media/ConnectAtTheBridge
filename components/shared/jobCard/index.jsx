@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/forbid-prop-types */
 import { React, useState } from 'react';
 
@@ -24,13 +25,10 @@ const JobStepperCard = ({ job, isJobsPage, form, height, width, children }) => {
 
   let color;
 
-  const blue = '#5271FF';
-  const orange = '#ff813c';
-
   if (formJob.job === 'Full-Time') {
-    color = blue;
+    color = theme.palette.primary.main;
   } else if (formJob.job === 'Part-Time') {
-    color = orange;
+    color = theme.palette.tertiary.main;
   }
 
   return (
@@ -117,9 +115,7 @@ JobStepperCard.propTypes = {
 };
 
 JobStepperCard.defaultProps = {
-  job: {},
   isJobsPage: false,
-  form: {},
 };
 
 export default JobStepperCard;

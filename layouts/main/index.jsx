@@ -51,6 +51,7 @@ const Main = ({ children, colorInvert, bgcolor }) => {
           <Topbar
             onSidebarOpen={handleSidebarOpen}
             colorInvert={trigger ? false : colorInvert}
+            openSidebar={openSidebar}
           />
         </Container>
       </AppBar>

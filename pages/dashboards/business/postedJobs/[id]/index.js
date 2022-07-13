@@ -23,10 +23,12 @@ export async function getServerSideProps({ query: { id } }) {
   const businesses = await Business.findById(id);
   const jobs = await Job.find({ businessID: id });
 
+  const jobsReverse = jobs.reverse();
+
   return {
     props: {
       business: JSON.parse(JSON.stringify(businesses)),
-      jobs: JSON.parse(JSON.stringify(jobs)),
+      jobs: JSON.parse(JSON.stringify(jobsReverse)),
     },
   };
 }

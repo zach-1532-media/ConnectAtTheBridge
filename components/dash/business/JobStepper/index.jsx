@@ -18,7 +18,7 @@ import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import Container from '@mui/material/Container';
 
-import { GeneralSnack } from '../../../shared/snackbars';
+import { SuccessSnack, GeneralSnack } from '../../../shared/snackbars';
 import Backdrop from '../../../shared/backdrop';
 import JobCard from '../../../shared/jobCard';
 import Listing from './components/listing';
@@ -54,6 +54,7 @@ const JobStepper = ({ business }) => {
     jobTitle: '',
   });
   const [openBackdrop, setOpenBackdrop] = useState(false);
+  const [openSuccess, setOpenSuccess] = useState(false);
   const [generalError, setGeneralError] = useState(false);
 
   const createJob = async () => {
@@ -66,6 +67,7 @@ const JobStepper = ({ business }) => {
         },
         body: JSON.stringify({
           ...form,
+          dateCreated: new Date(),
           businessID: id,
           responsibilities: responsibilities,
           qualifications: qualifications,
@@ -75,6 +77,7 @@ const JobStepper = ({ business }) => {
       const data = await response.json();
       if (data.status === 200) {
         setOpenBackdrop(false);
+        setOpenSuccess(true);
         router.push(`/dashboards/business/postedJobs/${id}`);
       } else if (data.status === 400) {
         setOpenBackdrop(false);
@@ -88,6 +91,7 @@ const JobStepper = ({ business }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setOpenBackdrop(true);
     createJob();
   };
 
@@ -202,7 +206,10 @@ const JobStepper = ({ business }) => {
       </Box>
       <Divider sx={{ mb: '2em', mt: '2em' }} />
       <Box width={1}>
-        <Stepper activeStep={activeStep}>
+        <Stepper
+          activeStep={activeStep}
+          sx={{ bgcolor: theme.palette.background.default }}
+        >
           {steps.map((step, index) => (
             <Step
               key={step.label}
@@ -210,13 +217,14 @@ const JobStepper = ({ business }) => {
               sx={{
                 display: 'flex',
                 alignItems: 'center',
-                padding: 0,
+                padding: 2,
                 width: '100%',
                 '& .MuiButtonBase-root': {
                   position: 'relative',
                   bgcolor:
-                    activeStep === index ? 'primary.main' : 'alternate.main',
-                  color: activeStep === index ? 'text.primary' : 'common.white',
+                    activeStep === index
+                      ? theme.palette.primary.main
+                      : theme.palette.secondary.lighter,
                   height: theme.spacing(6),
                   padding: theme.spacing(0, 3),
                   zIndex: 1,
@@ -236,40 +244,12 @@ const JobStepper = ({ business }) => {
                 <StepButton onClick={handleStep(index)}>
                   {isMd ? step.label : ''}
                 </StepButton>
-                {index === steps.length - 1 ? null : (
-                  <Box
-                    sx={{
-                      width: 0,
-                      height: 0,
-                      borderTop: `${theme.spacing(3)} solid transparent`,
-                      borderBottom: `${theme.spacing(3)} solid transparent`,
-                      borderLeft: `${theme.spacing(2)} solid ${
-                        activeStep === index
-                          ? theme.palette.primary.main
-                          : theme.palette.alternate.main
-                      }`,
-                      transform: `translateX(${theme.spacing(0)})`,
-                      zIndex: 2,
-                    }}
-                  />
-                )}
               </>
             </Step>
           ))}
         </Stepper>
         {activeStep === steps.length ? (
           <>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'center',
-              }}
-            >
-              <Typography sx={{ mt: 2, mb: 1 }}>
-                Great! Click to submit to start your job search or click on the
-                above buttons to edit.
-              </Typography>
-            </Box>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
               <Button variant="contained" disableRipple onClick={handleReset}>
@@ -314,6 +294,11 @@ const JobStepper = ({ business }) => {
       <GeneralSnack
         generalError={generalError}
         setGeneralError={setGeneralError}
+      />
+      <SuccessSnack
+        openSuccess={openSuccess}
+        setOpenSuccess={setOpenSuccess}
+        message="jobPost"
       />
       <Backdrop openBackdrop={openBackdrop} />
     </Container>

@@ -9,12 +9,15 @@ import PropTypes from 'prop-types';
 import Card from '@mui/material/Card';
 import Box from '@mui/material/Box';
 
+import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
 import CardContent from '@mui/material/CardContent';
 import SaveIcon from '@mui/icons-material/Save';
+import { useTheme } from '@mui/material/styles';
 
+import Backdrop from '../backdrop';
 import EditBusinessFields from './components/editBusinessFields';
 
 const EditDetailsCard = ({
@@ -22,8 +25,8 @@ const EditDetailsCard = ({
   subtitle,
   data,
   business,
+  setEdit,
   setOpenSuccess,
-  setOpenBackdrop,
   setGeneralError,
 }) => {
   const [form, setForm] = useState({
@@ -43,8 +46,11 @@ const EditDetailsCard = ({
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
+  const [openBackdrop, setOpenBackdrop] = useState(false);
 
   const router = useRouter();
+
+  const theme = useTheme();
 
   const updateInfo = async () => {
     try {
@@ -62,23 +68,27 @@ const EditDetailsCard = ({
         setIsSubmitting(false);
         setOpenBackdrop(false);
         setOpenSuccess(true);
-        router.reload();
+        router.replace(router.asPath);
+        setEdit(false);
       } else if (editData.status === 400) {
         setIsSubmitting(false);
         setOpenBackdrop(false);
         setGeneralError(true);
+        router.replace(router.asPath);
+        setEdit(false);
       }
     } catch (err) {
       setIsSubmitting(false);
       setOpenBackdrop(false);
       setGeneralError(true);
+      router.replace(router.asPath);
+      setEdit(false);
     }
   };
 
   useEffect(() => {
     if (isSubmitting) {
       if (Object.keys(errors).length === 0) {
-        setOpenBackdrop(true);
         updateInfo();
       } else {
         setIsSubmitting(false);
@@ -108,6 +118,7 @@ const EditDetailsCard = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors(validate());
+    setOpenBackdrop(true);
     setIsSubmitting(true);
   };
   return (
@@ -124,13 +135,26 @@ const EditDetailsCard = ({
           </Typography>
           <Typography variant="subtitle2">{subtitle}</Typography>
         </Box>
-        <Button
-          variant="contained"
-          onClick={handleSubmit}
-          startIcon={<SaveIcon />}
-        >
-          Save
-        </Button>
+        <Stack direction="row" spacing={2}>
+          <Button
+            sx={{
+              color: theme.colors.error.main,
+              '&:hover': {
+                background: theme.colors.error.lighter,
+              },
+            }}
+            onClick={() => setEdit(false)}
+          >
+            Cancel
+          </Button>
+          <Button
+            variant="contained"
+            onClick={handleSubmit}
+            startIcon={<SaveIcon />}
+          >
+            Save
+          </Button>
+        </Stack>
       </Box>
       <Divider />
 
@@ -143,6 +167,7 @@ const EditDetailsCard = ({
           <EditBusinessFields form={form} setForm={setForm} errors={errors} />
         ) : null}
       </CardContent>
+      <Backdrop open={openBackdrop} />
     </Card>
   );
 };
@@ -152,7 +177,7 @@ EditDetailsCard.propTypes = {
   subtitle: PropTypes.string.isRequired,
   data: PropTypes.object.isRequired,
   business: PropTypes.bool,
-  setOpenBackdrop: PropTypes.func.isRequired,
+  setEdit: PropTypes.func.isRequired,
   setOpenSuccess: PropTypes.func.isRequired,
   setGeneralError: PropTypes.func.isRequired,
 };

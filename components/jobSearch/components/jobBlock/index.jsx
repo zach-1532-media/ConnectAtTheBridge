@@ -34,7 +34,7 @@ const JobBlock = ({ jobs }) => {
       <Grid container spacing={4}>
         {_DATA.currentData().map((job) => {
           return (
-            <Grid item xs={12} sm={6} md={4} key={job.jobTitle}>
+            <Grid item xs={12} sm={6} md={4} key={job._id}>
               <Box
                 display="block"
                 width={1}
@@ -47,7 +47,7 @@ const JobBlock = ({ jobs }) => {
                   },
                 }}
               >
-                <JobCard job={job} height={1} width={1} key={job.jobTitle}>
+                <JobCard job={job} height={1} width={1} key={job._id}>
                   <ListingQuickView>
                     <ListingQuickViewHeader job={job}>
                       <ListingQuickViewButton link={`/jobListing/${job._id}`}>

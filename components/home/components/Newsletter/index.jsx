@@ -206,70 +206,68 @@ const Newsletter = ({
                 </Box>
               </CardMedia>
               <CardContent>
-                <form onSubmit={formSubmit}>
-                  <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id="first-name"
-                        name="firstName"
-                        label="First Name"
-                        value={form.firstName}
-                        onChange={handleChange}
-                        error={errors.firstName ? true : null}
-                        helperText={errors.firstName ? errors.firstName : null}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id="last-name"
-                        name="lastName"
-                        label="Last Name"
-                        value={form.lastName}
-                        onChange={handleChange}
-                        error={errors.lastName ? true : null}
-                        helperText={errors.lastName ? errors.lastName : null}
-                      />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        fullWidth
-                        id="email"
-                        name="email"
-                        label="Email"
-                        value={form.email}
-                        onChange={handleChange}
-                        error={
-                          errors.email ? true : errors.regEmail ? true : null
-                        }
-                        helperText={
-                          errors.email
-                            ? errors.email
-                            : errors.regEmail
-                            ? errors.regEmail
-                            : null
-                        }
-                      />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                      <Button
-                        variant="contained"
-                        color="primary"
-                        size="large"
-                        fullWidth
-                        type="submit"
-                      >
-                        Submit
-                      </Button>
-                    </Grid>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="first-name"
+                      name="firstName"
+                      label="First Name"
+                      value={form.firstName}
+                      onChange={handleChange}
+                      error={errors.firstName ? true : null}
+                      helperText={errors.firstName ? errors.firstName : null}
+                    />
                   </Grid>
-                </form>
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="last-name"
+                      name="lastName"
+                      label="Last Name"
+                      value={form.lastName}
+                      onChange={handleChange}
+                      error={errors.lastName ? true : null}
+                      helperText={errors.lastName ? errors.lastName : null}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <TextField
+                      required
+                      fullWidth
+                      id="email"
+                      name="email"
+                      label="Email"
+                      value={form.email}
+                      onChange={handleChange}
+                      error={
+                        errors.email ? true : errors.regEmail ? true : null
+                      }
+                      helperText={
+                        errors.email
+                          ? errors.email
+                          : errors.regEmail
+                          ? errors.regEmail
+                          : null
+                      }
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      size="large"
+                      fullWidth
+                      onClick={formSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </Grid>
+                </Grid>
               </CardContent>
             </Card>
           </Box>
