@@ -39,28 +39,43 @@ const MenuWrapper = styled(Box)(
   `
 );
 
-const SidebarMenu = ({ business }) => {
+const SidebarMenu = ({ data, userPage }) => {
   const theme = useTheme();
 
   const router = useRouter();
 
-  const menuItems = [
+  const businessMenuItems = [
     {
       name: 'Profile',
-      link: `/dashboards/business/${business._id}`,
+      link: `/dashboards/business/${data._id}`,
       icon: <ManageAccountsTwoToneIcon />,
     },
     {
       name: 'Posted Jobs',
-      link: `/dashboards/business/postedJobs/${business._id}`,
+      link: `/dashboards/business/postedJobs/${DataView._id}`,
       icon: <WorkTwoToneIcon />,
     },
     {
       name: 'Post a Job',
-      link: `/dashboards/business/postAJob/${business._id}`,
+      link: `/dashboards/business/postAJob/${data._id}`,
       icon: <PostAddTwoToneIcon />,
     },
   ];
+
+  const userMenuItems = [
+    {
+      name: 'Profile',
+      link: `/dashboards/user/${data.email}`,
+      icon: <ManageAccountsTwoToneIcon />,
+    },
+    {
+      name: 'Job Search',
+      link: `/dashboards/user/jobSearch/${data.email}`,
+      icon: <WorkTwoToneIcon fontSize="small" />,
+    },
+  ];
+
+  const menuItems = userPage === true ? userMenuItems : businessMenuItems;
 
   return (
     <>
@@ -98,7 +113,8 @@ const SidebarMenu = ({ business }) => {
 };
 
 SidebarMenu.propTypes = {
-  business: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  userPage: PropTypes.bool.isRequired,
 };
 
 export default SidebarMenu;

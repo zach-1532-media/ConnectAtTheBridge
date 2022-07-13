@@ -14,7 +14,6 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 import UploadTwoToneIcon from '@mui/icons-material/UploadTwoTone';
-import MoreHorizTwoToneIcon from '@mui/icons-material/MoreHorizTwoTone';
 
 const Input = styled('input')({
   display: 'none',
@@ -77,7 +76,7 @@ const CardCoverAction = styled(Box)(
 `
 );
 
-const ProfileCover = ({ data }) => (
+const ProfileCover = ({ data, userPage }) => (
   <>
     <Box display="flex" mb={3}>
       <Box>{/* PUT TABS HERE */}</Box>
@@ -99,7 +98,15 @@ const ProfileCover = ({ data }) => (
     </CardCover>
     <Tooltip placement="right-end" title="Upload Your Logo">
       <AvatarWrapper>
-        <Avatar variant="rounded" alt={data.businessName} src={data.avatar} />
+        <Avatar
+          variant="rounded"
+          alt={
+            userPage
+              ? `${data.firstName} avatar`
+              : `${data.businessName} avatar`
+          }
+          src={data.avatar}
+        />
         <ButtonUploadWrapper>
           <Input
             accept="image/*"
@@ -117,9 +124,9 @@ const ProfileCover = ({ data }) => (
     </Tooltip>
     <Box py={2} pl={2} mb={3}>
       <Typography gutterBottom variant="h4">
-        {data.businessName}
+        {!userPage ? data.businessName : null}
       </Typography>
-      <Typography variant="subtitle2">{data.bio}</Typography>
+      <Typography variant="subtitle2">{!userPage ? data.bio : null}</Typography>
       <Typography
         sx={{
           py: 2,
@@ -127,44 +134,41 @@ const ProfileCover = ({ data }) => (
         variant="subtitle2"
         color="text.primary"
       >
-        {data.city ?? ''} | {data.state ?? ''}
+        {data.city ?? ''} {data.city ? '|' : ''} {data.state ?? ''}
       </Typography>
-      <Box
-        display={{ xs: 'block', md: 'flex' }}
-        alignItems="center"
-        justifyContent="space-between"
-      >
-        <Box>
-          <Button size="small" variant="contained">
-            Follow
-          </Button>
-          <Button
-            href={`https://${data.site}`}
-            target="_blank"
-            size="small"
-            sx={{
-              mx: 1,
-            }}
-            variant="outlined"
-          >
-            View website
-          </Button>
-          <IconButton
-            color="primary"
-            sx={{
-              p: 0.5,
-            }}
-          >
-            <MoreHorizTwoToneIcon />
-          </IconButton>
+      {!userPage ? (
+        <Box
+          display={{ xs: 'block', md: 'flex' }}
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Box>
+            <Button size="small" variant="contained">
+              Follow
+            </Button>
+            <Button
+              href={`https://${data.site}`}
+              target="_blank"
+              size="small"
+              sx={{
+                mx: 1,
+              }}
+              variant="outlined"
+            >
+              View website
+            </Button>
+          </Box>
         </Box>
-      </Box>
+      ) : (
+        <></>
+      )}
     </Box>
   </>
 );
 
 ProfileCover.propTypes = {
   data: PropTypes.object.isRequired,
+  userPage: PropTypes.bool.isRequired,
 };
 
 export default ProfileCover;

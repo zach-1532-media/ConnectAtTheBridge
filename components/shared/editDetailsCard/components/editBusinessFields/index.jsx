@@ -18,10 +18,10 @@ import {
   yearsInBusiness,
 } from '../../../data';
 
-const EditBusinessFields = ({ form, setForm, errors }) => {
+const EditBusinessFields = ({ businessForm, setBusinessForm, errors }) => {
   const handleChange = (e) => {
-    setForm({
-      ...form,
+    setBusinessForm({
+      ...businessForm,
       [e.target.name]: e.target.value,
     });
   };
@@ -31,7 +31,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.businessName ?? ''}
+          value={businessForm.businessName ?? ''}
           size="small"
           variant="standard"
           name="businessName"
@@ -46,7 +46,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.email ?? ''}
+          value={businessForm.email ?? ''}
           size="small"
           variant="standard"
           name="email"
@@ -67,7 +67,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.site ?? ''}
+          value={businessForm.site ?? ''}
           size="small"
           variant="standard"
           name="site"
@@ -80,7 +80,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.firstName ?? ''}
+          value={businessForm.firstName ?? ''}
           size="small"
           variant="standard"
           name="firstName"
@@ -93,7 +93,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.lastName ?? ''}
+          value={businessForm.lastName ?? ''}
           size="small"
           variant="standard"
           name="lastName"
@@ -106,7 +106,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.address ?? ''}
+          value={businessForm.address ?? ''}
           size="small"
           variant="standard"
           name="address"
@@ -119,7 +119,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.city ?? ''}
+          value={businessForm.city ?? ''}
           size="small"
           variant="standard"
           name="city"
@@ -132,7 +132,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.state ?? ''}
+          value={businessForm.state ?? ''}
           select
           size="small"
           variant="standard"
@@ -152,7 +152,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.zip ?? ''}
+          value={businessForm.zip ?? ''}
           size="small"
           variant="standard"
           name="zip"
@@ -167,7 +167,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
           multiline
           maxRows={10}
           sx={{ width: '75%', mb: '1em' }}
-          value={form.bio ?? ''}
+          value={businessForm.bio ?? ''}
           size="small"
           variant="standard"
           name="bio"
@@ -181,7 +181,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
         <TextField
           sx={{ width: '75%' }}
           select
-          value={form.industry ?? ''}
+          value={businessForm.industry ?? ''}
           size="small"
           variant="standard"
           name="industry"
@@ -200,7 +200,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.yearsInBusiness ?? ''}
+          value={businessForm.yearsInBusiness ?? ''}
           select
           size="small"
           variant="standard"
@@ -220,7 +220,7 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
       field: (
         <TextField
           sx={{ width: '75%' }}
-          value={form.employees ?? ''}
+          value={businessForm.employees ?? ''}
           select
           size="small"
           variant="standard"
@@ -256,9 +256,9 @@ const EditBusinessFields = ({ form, setForm, errors }) => {
 };
 
 EditBusinessFields.propTypes = {
-  form: PropTypes.object.isRequired,
+  businessForm: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired,
-  setForm: PropTypes.func.isRequired,
+  setBusinessForm: PropTypes.func.isRequired,
 };
 
 export default EditBusinessFields;

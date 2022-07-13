@@ -19,6 +19,7 @@ import { useTheme } from '@mui/material/styles';
 
 import Backdrop from '../backdrop';
 import EditBusinessFields from './components/editBusinessFields';
+import EditUserFields from './components/editUserFields';
 
 const EditDetailsCard = ({
   title,
@@ -29,7 +30,7 @@ const EditDetailsCard = ({
   setOpenSuccess,
   setGeneralError,
 }) => {
-  const [form, setForm] = useState({
+  const [businessForm, setBusinessForm] = useState({
     businessName: data.businessName,
     site: data.site,
     email: data.email,
@@ -44,8 +45,33 @@ const EditDetailsCard = ({
     yearsInBusiness: data.yearsInBusiness,
     employees: data.employees,
   });
+  const [userForm, setUserForm] = useState({
+    firstName: data.firstName,
+    lastName: data.lastName,
+    email: data.email,
+    address: data.address,
+    city: data.city,
+    state: data.state,
+    zip: data.zip,
+    bio: data.bio,
+    salary: data.salary,
+    workType: data.workType,
+    hourlyRate: data.workType,
+    travel: data.travel,
+    benefits: data.benefits,
+  });
+  const job = data.job ? data.job : [];
+  const salary = data.salary ? data.salary : [];
+  const hourlyRate = data.hourlyRate ? data.hourlyRate : [];
+  const workType = data.workType ? data.workType : [];
+  const [userJob, setUserJob] = useState(job);
+  const [userSalary, setUserSalary] = useState(salary);
+  const [userHourlyRate, setUserHourlyRate] = useState(hourlyRate);
+  const [userWorkType, setUserWorkType] = useState(workType);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
+  // eslint-disable-next-line no-unused-vars
+  const [userErrors, setUserErrors] = useState({});
   const [openBackdrop, setOpenBackdrop] = useState(false);
 
   const router = useRouter();
@@ -54,15 +80,18 @@ const EditDetailsCard = ({
 
   const updateInfo = async () => {
     try {
-      const updateUserInfo = {
+      const updateBusinessInfo = {
         method: 'PUT',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(form),
+        body: JSON.stringify(businessForm),
       };
-      const response = await fetch(`/api/business/${data._id}`, updateUserInfo);
+      const response = await fetch(
+        `/api/business/${data._id}`,
+        updateBusinessInfo
+      );
       const editData = await response.json();
       if (editData.status === 200) {
         setIsSubmitting(false);
@@ -100,12 +129,12 @@ const EditDetailsCard = ({
     const err = {};
     const regEmail = new RegExp(
       /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
-    ).test(form.email);
+    ).test(businessForm.email);
 
-    if (!form.businessName) {
+    if (!businessForm.businessName) {
       err.businessName = 'Company name is required';
     }
-    if (!form.email) {
+    if (!businessForm.email) {
       err.email = 'Email is required';
     }
     if (!regEmail) {
@@ -164,8 +193,26 @@ const EditDetailsCard = ({
         }}
       >
         {business ? (
-          <EditBusinessFields form={form} setForm={setForm} errors={errors} />
-        ) : null}
+          <EditBusinessFields
+            form={businessForm}
+            setForm={setBusinessForm}
+            errors={errors}
+          />
+        ) : (
+          <EditUserFields
+            userForm={userForm}
+            setUserForm={setUserForm}
+            userJob={userJob}
+            setUserJob={setUserJob}
+            userSalary={userSalary}
+            setUserSalary={setUserSalary}
+            userHourlyRate={userHourlyRate}
+            setUserHourlyRate={setUserHourlyRate}
+            userWorkType={userWorkType}
+            setUserWorkType={setUserWorkType}
+            userErrors={userErrors}
+          />
+        )}
       </CardContent>
       <Backdrop open={openBackdrop} />
     </Card>

@@ -8,10 +8,10 @@ import dbConnect from '../../../../lib/dbConnect';
 import Business from '../../../../models/Business';
 
 import Dash from '../../../../layouts/dash';
-import Profile from '../../../../components/dash/business/profile/index';
+import Profile from '../../../../components/dash/shared/profile';
 
-const PostAJob = ({ business }) => (
-  <Dash business={business}>
+const ProfilePage = ({ business }) => (
+  <Dash business={business} userPage={false}>
     <Profile business={business} />
   </Dash>
 );
@@ -28,8 +28,8 @@ export async function getServerSideProps({ query: { id } }) {
   };
 }
 
-PostAJob.propTypes = {
+ProfilePage.propTypes = {
   business: PropTypes.object.isRequired,
 };
 
-export default PostAJob;
+export default ProfilePage;

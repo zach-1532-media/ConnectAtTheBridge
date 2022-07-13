@@ -23,9 +23,9 @@ const TabsWrapper = styled(Tabs)(
 `
 );
 
-function Profile({ business, user }) {
+function Profile({ business, user, userPage }) {
   const [currentTab, setCurrentTab] = useState('account');
-  const data = business || user;
+  const data = userPage ? user : business;
 
   const tabs = [
     { value: 'account', label: 'Account' },
@@ -65,11 +65,17 @@ function Profile({ business, user }) {
             </TabsWrapper>
           </Grid>
           <Grid item xs={12}>
-            {currentTab === 'account' && <ProfileCover data={data} />}
-            {currentTab === 'edit_profile' && <EditProfileTab data={data} />}
-            {currentTab === 'notifications' && <NotificationsTab />}
-            {currentTab === 'security' && <SecurityTab />}
-            {currentTab === 'payments' && <PaymentsTab />}
+            {currentTab === 'account' && (
+              <ProfileCover data={data} userPage={userPage} />
+            )}
+            {currentTab === 'edit_profile' && (
+              <EditProfileTab data={data} userPage={userPage} />
+            )}
+            {currentTab === 'notifications' && (
+              <NotificationsTab userPage={userPage} />
+            )}
+            {currentTab === 'security' && <SecurityTab userPage={userPage} />}
+            {currentTab === 'payments' && <PaymentsTab userPage={userPage} />}
           </Grid>
         </Grid>
       </Box>
@@ -80,6 +86,7 @@ function Profile({ business, user }) {
 Profile.propTypes = {
   business: PropTypes.object,
   user: PropTypes.object,
+  userPage: PropTypes.bool.isRequired,
 };
 
 Profile.defaultProps = {

@@ -9,7 +9,7 @@ import Grid from '@mui/material/Grid';
 
 import SearchBar from '../../../shared/searchbar';
 
-const Hero = ({ search, setSearch, handleSearchSubmit }) => {
+const Hero = ({ search, setSearch }) => {
   const theme = useTheme();
 
   return (
@@ -35,11 +35,7 @@ const Hero = ({ search, setSearch, handleSearchSubmit }) => {
               </Typography>
             </Box>
           </Box>
-          <SearchBar
-            search={search}
-            setSearch={setSearch}
-            handleSearchSubmit={handleSearchSubmit}
-          />
+          <SearchBar search={search} setSearch={setSearch} />
         </Grid>
         <Grid item xs={12} md={6}>
           <Box height={1} width={1} display="flex" justifyContent="center">
@@ -66,7 +62,6 @@ const Hero = ({ search, setSearch, handleSearchSubmit }) => {
 Hero.propTypes = {
   search: PropTypes.string.isRequired,
   setSearch: PropTypes.func.isRequired,
-  handleSearchSubmit: PropTypes.func.isRequired,
 };
 
 export default Hero;

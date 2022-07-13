@@ -13,6 +13,7 @@ import CardContent from '@mui/material/CardContent';
 import EditTwoToneIcon from '@mui/icons-material/EditTwoTone';
 
 import BusinessFields from './components/businessFields';
+import UserFields from './components/userFields';
 
 const DetailsCard = ({ title, subtitle, data, business, setEdit }) => (
   <Card>
@@ -49,7 +50,7 @@ const DetailsCard = ({ title, subtitle, data, business, setEdit }) => (
         p: 4,
       }}
     >
-      {business ? <BusinessFields data={data} /> : null}
+      {business ? <BusinessFields data={data} /> : <UserFields data={data} />}
     </CardContent>
   </Card>
 );

@@ -107,6 +107,26 @@ ExistingNewsletterSnack.propTypes = {
   setExistingNewsletterError: PropTypes.func.isRequired,
 };
 
+export const NoUserSnack = ({ openNoUser, setOpenNoUser }) => {
+  const handleNoUserClose = () => setOpenNoUser(false);
+
+  return (
+    <Snackbar
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      open={openNoUser}
+      autoHideDuration={6000}
+      onClose={handleNoUserClose}
+    >
+      <Alert severity="error">No user with that email exists!</Alert>
+    </Snackbar>
+  );
+};
+
+NoUserSnack.propTypes = {
+  openNoUser: PropTypes.bool.isRequired,
+  setOpenNoUser: PropTypes.func.isRequired,
+};
+
 export const GeneralSnack = ({ generalError, setGeneralError }) => {
   const handleGeneralErrorClose = () => setGeneralError(false);
 

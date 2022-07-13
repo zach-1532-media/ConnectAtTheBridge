@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 /* eslint-disable react/require-default-props */
 import React from 'react';
 
@@ -13,11 +14,12 @@ import IconButton from '@mui/material/IconButton';
 import { useTheme } from '@mui/material/styles';
 
 const SearchBar = ({ search, setSearch }) => {
-  const searchId = search;
   const router = useRouter();
 
   const handleSubmit = () => {
-    router.push(`/jobSearch/${searchId}`);
+    router.replace({
+      query: { ...router.query, search: search },
+    });
   };
 
   const handleKeyPress = (e) => {

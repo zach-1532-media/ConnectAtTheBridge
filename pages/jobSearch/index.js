@@ -11,38 +11,39 @@ import JobSearch from '../../components/jobSearch';
 
 const JobSearchDynamicPage = ({ jobs }) => <JobSearch jobs={jobs} />;
 
-export async function getServerSideProps({ query: { searchId } }) {
+export async function getServerSideProps({ query: { search } }) {
   await dbConnect();
   // eslint-disable-next-line global-require
   require('../../models/Business');
 
-  const jobs =
-    searchId === 'all'
-      ? await Job.aggregate().lookup({
+  const jobs = !search
+    ? await Job.aggregate().lookup({
+        from: 'businesses',
+        localField: 'businessID',
+        foreignField: '_id',
+        as: 'business',
+      })
+    : await Job.aggregate()
+        .search({
+          index: 'Job Search',
+          text: {
+            query: search,
+            path: ['jobTitle', 'description'],
+            fuzzy: {},
+          },
+        })
+        .lookup({
           from: 'businesses',
           localField: 'businessID',
           foreignField: '_id',
           as: 'business',
-        })
-      : await Job.aggregate()
-          .search({
-            index: 'Job Search',
-            text: {
-              query: searchId,
-              path: ['jobTitle', 'description'],
-              fuzzy: {},
-            },
-          })
-          .lookup({
-            from: 'businesses',
-            localField: 'businessID',
-            foreignField: '_id',
-            as: 'business',
-          });
+        });
+
+  const jobsReverse = jobs.reverse();
 
   return {
     props: {
-      jobs: JSON.parse(JSON.stringify(jobs)),
+      jobs: JSON.parse(JSON.stringify(jobsReverse)),
     },
   };
 }

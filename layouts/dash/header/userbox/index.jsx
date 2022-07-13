@@ -56,9 +56,8 @@ const UserBoxDescription = styled(Typography)(
 `
 );
 
-function HeaderUserbox({ business }) {
-  const { firstName, lastName, businessName, avatar } = business;
-  const name = `${firstName} ${lastName}`;
+function HeaderUserbox({ data, userPage }) {
+  const name = `${data.firstName} ${data.lastName}`;
 
   const ref = useRef(null);
   const [isOpen, setOpen] = useState(false);
@@ -71,13 +70,46 @@ function HeaderUserbox({ business }) {
     setOpen(false);
   };
 
+  const businessLinks = [
+    {
+      name: 'Profile',
+      link: `/dashboards/business/${data._id}`,
+      icon: <ManageAccountsTwoToneIcon fontSize="small" />,
+    },
+    {
+      name: 'Posted Jobs',
+      link: `/dashboards/business/postedJobs/${data._id}`,
+      icon: <WorkTwoToneIcon fontSize="small" />,
+    },
+    {
+      name: 'Post A Job',
+      link: `/dashboards/business/postAJob/${data._id}`,
+      icon: <PostAddTwoToneIcon fontSize="small" />,
+    },
+  ];
+
+  const userLinks = [
+    {
+      name: 'Profile',
+      link: `/dashboards/user/${data.email}`,
+      icon: <ManageAccountsTwoToneIcon fontSize="small" />,
+    },
+    {
+      name: 'Job Search',
+      link: `/dashboards/user/jobSearch/${data.email}`,
+      icon: <WorkTwoToneIcon fontSize="small" />,
+    },
+  ];
+
+  const links = userPage ? userLinks : businessLinks;
+
   return (
     <>
       <UserBoxButton color="secondary" ref={ref} onClick={handleOpen}>
         <Avatar
           variant="rounded"
           alt={name}
-          src={avatar === undefined ? firstName[0] : avatar}
+          src={data.avatar === undefined ? data.firstName[0] : data.avatar}
         />
         <Box
           component="span"
@@ -88,7 +120,7 @@ function HeaderUserbox({ business }) {
           <UserBoxText>
             <UserBoxLabel variant="body1">{name}</UserBoxLabel>
             <UserBoxDescription variant="body2">
-              {businessName}
+              {data.businessName === undefined ? null : data.businessName}
             </UserBoxDescription>
           </UserBoxText>
         </Box>
@@ -128,12 +160,12 @@ function HeaderUserbox({ business }) {
           <Avatar
             variant="rounded"
             alt={name}
-            src={avatar === undefined ? firstName[0] : avatar}
+            src={data.avatar === undefined ? data.firstName[0] : data.avatar}
           />
           <UserBoxText>
             <UserBoxLabel variant="body1">{name}</UserBoxLabel>
             <UserBoxDescription variant="body2">
-              {businessName}
+              {data.businessName === undefined ? null : data.businessName}
             </UserBoxDescription>
           </UserBoxText>
         </MenuUserBox>
@@ -148,42 +180,14 @@ function HeaderUserbox({ business }) {
           }}
           component="nav"
         >
-          <Link href={`/dashboards/business/${business._id}`} passHref>
-            <ListItem
-              onClick={() => {
-                handleClose();
-              }}
-              button
-            >
-              <ManageAccountsTwoToneIcon fontSize="small" />
-              <ListItemText primary="Profile" />
-            </ListItem>
-          </Link>
-          <Link
-            href={`/dashboards/business/postedJobs/${business._id}`}
-            passHref
-          >
-            <ListItem
-              onClick={() => {
-                handleClose();
-              }}
-              button
-            >
-              <WorkTwoToneIcon fontSize="small" />
-              <ListItemText primary="Posted Jobs" />
-            </ListItem>
-          </Link>
-          <Link href={`/dashboards/business/postAJob/${business._id}`} passHref>
-            <ListItem
-              onClick={() => {
-                handleClose();
-              }}
-              button
-            >
-              <PostAddTwoToneIcon fontSize="small" />
-              <ListItemText primary="Post A Job" />
-            </ListItem>
-          </Link>
+          {links.map((link) => (
+            <Link href={link.link} passHref key={link.link}>
+              <ListItem onClick={() => handleClose()} button>
+                {link.icon}
+                <ListItemText primary={link.name} />
+              </ListItem>
+            </Link>
+          ))}
         </List>
         <Divider />
       </Popover>
@@ -192,7 +196,8 @@ function HeaderUserbox({ business }) {
 }
 
 HeaderUserbox.propTypes = {
-  business: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+  userPage: PropTypes.bool.isRequired,
 };
 
 export default HeaderUserbox;

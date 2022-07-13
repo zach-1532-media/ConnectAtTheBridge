@@ -10,12 +10,14 @@ import { useTheme } from '@mui/material/styles';
 import Sidebar from './sidebar';
 import Header from './header';
 
-const Dash = ({ children, business }) => {
+const Dash = ({ children, business, user, userPage }) => {
   const theme = useTheme();
+
+  const data = userPage ? user : business;
 
   return (
     <>
-      <Sidebar business={business} />
+      <Sidebar data={data} userPage={userPage} />
       <Box
         sx={{
           position: 'relative',
@@ -102,7 +104,7 @@ const Dash = ({ children, business }) => {
         >
           <Box flexGrow={1}>
             <Box>
-              <Header business={business} />
+              <Header data={data} userPage={userPage} />
               {children}
             </Box>
           </Box>
@@ -114,7 +116,9 @@ const Dash = ({ children, business }) => {
 
 Dash.propTypes = {
   children: PropTypes.node,
-  business: PropTypes.object.isRequired,
+  business: PropTypes.object,
+  user: PropTypes.object,
+  userPage: PropTypes.bool,
 };
 
 export default Dash;

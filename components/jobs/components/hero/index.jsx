@@ -49,7 +49,7 @@ const Hero = () => {
               flexDirection={{ xs: 'column', sm: 'row' }}
               alignItems={{ xs: 'stretched', sm: 'flex-start' }}
             >
-              <Link href="/jobSearch/all" passHref>
+              <Link href="/jobSearch" passHref>
                 <Box
                   component={Button}
                   variant="contained"

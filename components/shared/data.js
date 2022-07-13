@@ -104,6 +104,15 @@ export const hourlyRateBands = [
   },
 ];
 
+export const yesNo = [
+  {
+    value: 'Yes',
+  },
+  {
+    value: 'No',
+  },
+];
+
 export const workTypes = [
   {
     type: 'Work From Home',

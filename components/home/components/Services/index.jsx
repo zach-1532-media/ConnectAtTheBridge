@@ -80,7 +80,7 @@ const Services = () => {
     <Box>
       <Grid container spacing={2}>
         {mock.map((item, i) => (
-          <Grid item xs={12} md={4} key={item.name}>
+          <Grid item xs={12} md={4} key={item.title}>
             <Box
               width={1}
               height={1}
